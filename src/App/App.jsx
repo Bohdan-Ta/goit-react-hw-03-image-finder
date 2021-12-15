@@ -1,43 +1,45 @@
-import { Component } from "react";
-// import Button from "../Button";
-import Modal from "../Modal";
-import s from "../Button/Button.module.css";
+import { Component } from 'react';
+// import { ToastContainer } from 'react-toastify';
+import Modal from '../Modal';
+import ImageGallery from '../ImageGallery';
+import Searchbar from '../Searchbar/Searchbar';
+
+// import featch from "../servises/getApi";
 
 export default class App extends Component {
   state = {
     showModal: false,
+    searchValue: '',
+    modalImg: {
+      src: '',
+      alt: '',
+    },
   };
 
-  componentDidMount() {}
-  componentDidUpdate() {}
-  componentWillUnmount() {}
+  getNameImage = searchValue => {
+    this.setState({ searchValue });
+  };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  toggleModal = (src, alt) => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+      modalImg: {
+        src,
+        alt,
+      },
+    }));
   };
 
   render() {
-    const { showModal } = this.state;
+    const { searchValue, showModal, modalImg } = this.state;
     return (
-      <>
-        {/* <Button /> */}
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <h1>hello</h1>
-            <button
-              className={s.button}
-              type="button"
-              onClick={this.toggleModal}
-            >
-              close Modal
-            </button>
-          </Modal>
-        )}
-
-        <button className={s.button} type="button" onClick={this.toggleModal}>
-          close Modal
-        </button>
-      </>
+      <div>
+        <Searchbar onSubmit={this.getNameImage} />
+        <ImageGallery imageName={searchValue} openModal={this.toggleModal} />
+        {showModal && <Modal onClose={this.toggleModal} modalImg={modalImg} />}
+        {showModal && <Modal onClose={this.toggleModal} />}
+        {/* <ToastContainer autoClose={5000} /> */}
+      </div>
     );
   }
 }
