@@ -1,8 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import { toast } from 'react-toastify';
+
 import { fetch } from '../../servises/getApi';
 import ImageDataView from '../ImageDataView';
 import Spinner from '../Loader';
+
 import s from './ImageGallery.module.css';
 
 const Status = {
@@ -37,16 +41,11 @@ export default class ImageGallery extends Component {
         const totalImages = images.totalHits;
 
         if (newImagesArray.length === 0 && totalImages === 0) {
-          alert('Oops nothing found');
-          return;
+          return toast.info('Try to input next name... ');
         }
         if (newImagesArray.length === 0 && totalImages !== 0) {
-          alert('Nothing more found');
-          return;
+          return toast.info('Nothing more found');
         }
-        // if (nextPage === 1) {
-        //   alert(`Found ${totalImages} images`);
-        // }
 
         this.setState(({ imagesArray }) => ({
           imagesArray: [...imagesArray, ...newImagesArray],
@@ -69,12 +68,12 @@ export default class ImageGallery extends Component {
     return (
       <>
         {status === 'idle' && (
-          <h2 className={s.title}>What do you want to see?</h2>
+          <h1 className={s.title}>What do you want to see?</h1>
         )}
 
         {status === 'pending' && <Spinner />}
 
-        {(status === 'resolved' || status === 'pending') && (
+        {status === 'resolved' && (
           <ImageDataView
             imagesArray={imagesArray}
             openModal={openModal}
@@ -82,7 +81,8 @@ export default class ImageGallery extends Component {
           />
         )}
 
-        {status === 'rejected' && alert('Ooops')}
+        {status === 'rejected' &&
+          toast.error('We are sorry but something went wrong')}
       </>
     );
   }

@@ -1,8 +1,11 @@
-// import Searchbar from "./Searchbar";
-import PropTypes from 'prop-types';
-import s from './Searchbar.module.css';
 import { Component } from 'react';
-// import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+
+import { BsFillBinocularsFill } from 'react-icons/bs';
+import { toast } from 'react-toastify';
+
+import s from './Searchbar.module.css';
+
 export default class Searchbar extends Component {
   state = {
     value: '',
@@ -18,7 +21,7 @@ export default class Searchbar extends Component {
     const { value } = this.state;
 
     if (value.trim() === '') {
-      return alert('input name image......');
+      return toast.info('Please input name image......');
     }
 
     onSubmit(value);
@@ -36,10 +39,12 @@ export default class Searchbar extends Component {
             value={value}
             type="text"
             autoComplete="off"
-            placeholder="Search images and photos"
+            placeholder="Search images ......."
           />
           <button type="submit" className={s.searchFormButton}>
-            RUN
+            <BsFillBinocularsFill
+              style={{ width: '30', fill: '#3f51b5', height: '30' }}
+            />
           </button>
         </form>
       </header>

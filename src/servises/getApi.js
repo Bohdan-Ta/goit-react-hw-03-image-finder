@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '24045276-2d1f958b632c915d7d2587282';
@@ -19,6 +20,6 @@ export async function fetch(name, page) {
     const result = await response.data;
     return result;
   } catch (error) {
-    alert(`No image with  ${name}`);
+    toast.dark(`No image with  ${name}`);
   }
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import ImageGalleryItem from '../ImageGalleryItem';
-import s from './ImageDataView.module.css';
 import Button from '../Button';
+
+import s from './ImageDataView.module.css';
 
 export default function ImageDataView({ imagesArray, openModal, loadMore }) {
   return (

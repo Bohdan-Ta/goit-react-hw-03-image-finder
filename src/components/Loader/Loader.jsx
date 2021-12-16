@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
+
 import s from './Loader.module.css';
 
 export default class Spinner extends Component {
@@ -8,7 +9,7 @@ export default class Spinner extends Component {
       <Loader
         className={s.loader}
         type="Circles"
-        color="#00BFFF"
+        color="#3f51b5"
         height={150}
         width={150}
         timeout={3000}
