@@ -7,10 +7,10 @@ export default class ImagePending extends Component {
     return (
       <Loader
         className={s.loader}
-        type="Grid"
+        type="Rings"
         color="#00BFFF"
-        height={100}
-        width={100}
+        height={80}
+        width={80}
         timeout={3000}
       />
     );

@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { toast } from 'react-toastify';
-import ImageDataView from './ImageDataView';
-import ImagePending from './ImagePending';
-import { fetch } from '../servises/getApi';
+import ImageDataView from '../ImageDataView';
+import ImagePending from '../Loader';
+import { fetch } from '../../servises/getApi';
 import s from './ImageGallery.module.css';
 
 const Status = {

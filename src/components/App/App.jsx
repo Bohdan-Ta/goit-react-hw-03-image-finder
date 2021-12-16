@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Modal from '../Modal';
 import ImageGallery from '../ImageGallery';
 import Searchbar from '../Searchbar/Searchbar';
@@ -37,8 +37,7 @@ export default class App extends Component {
         <Searchbar onSubmit={this.getNameImage} />
         <ImageGallery imageName={searchValue} openModal={this.toggleModal} />
         {showModal && <Modal onClose={this.toggleModal} modalImg={modalImg} />}
-        {showModal && <Modal onClose={this.toggleModal} />}
-        {/* <ToastContainer autoClose={5000} /> */}
+        <ToastContainer autoClose={5000} />
       </div>
     );
   }

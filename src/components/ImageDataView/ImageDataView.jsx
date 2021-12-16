@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageGalleryItem from './ImageGalleryItem';
-import InfiniteScrl from './InfiniteScroll';
+import ImageGalleryItem from '../ImageGalleryItem';
+import InfiniteScrl from '../../helpers/InfiniteScroll';
 import s from './ImageDataView.module.css';
 
 export default function ImageDataView({ imagesArray, openModal, loadMore }) {
