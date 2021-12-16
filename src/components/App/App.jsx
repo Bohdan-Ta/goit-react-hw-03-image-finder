@@ -1,16 +1,15 @@
 import { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
-import Modal from '../Modal';
-import ImageGallery from '../ImageGallery';
-import Searchbar from '../Searchbar/Searchbar';
 
-// import featch from "../servises/getApi";
+import Searchbar from '../Searchbar/Searchbar';
+import Sections from '../Section/Section';
+import ImageGallery from '../ImageGallery';
+import Modal from '../Modal';
 
 export default class App extends Component {
   state = {
     showModal: false,
     searchValue: '',
-    modalImg: {
+    modalPicture: {
       src: '',
       alt: '',
     },
@@ -23,7 +22,7 @@ export default class App extends Component {
   toggleModal = (src, alt) => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
-      modalImg: {
+      modalPicture: {
         src,
         alt,
       },
@@ -31,13 +30,16 @@ export default class App extends Component {
   };
 
   render() {
-    const { searchValue, showModal, modalImg } = this.state;
+    const { searchValue, showModal, modalPicture } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.getNameImage} />
-        <ImageGallery imageName={searchValue} openModal={this.toggleModal} />
-        {showModal && <Modal onClose={this.toggleModal} modalImg={modalImg} />}
-        <ToastContainer autoClose={5000} />
+        <Sections>
+          <ImageGallery imageName={searchValue} openModal={this.toggleModal} />
+        </Sections>
+        {showModal && (
+          <Modal onClose={this.toggleModal} modalPicture={modalPicture} />
+        )}
       </div>
     );
   }

@@ -1,9 +1,9 @@
-import s from "./Button.module.css";
+import s from './Button.module.css';
 
-export default function Button() {
+export default function Button({ loadMore }) {
   return (
-    <button type="button" className={s.button}>
-      Load more
+    <button type="button" className={s.button} onClick={loadMore}>
+      Load more...
     </button>
   );
 }

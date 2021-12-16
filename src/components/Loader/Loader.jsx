@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
-import s from './ImagePending.module.css';
+import s from './Loader.module.css';
 
-export default class ImagePending extends Component {
+export default class Spinner extends Component {
   render() {
     return (
       <Loader
         className={s.loader}
-        type="Rings"
+        type="Circles"
         color="#00BFFF"
-        height={80}
-        width={80}
+        height={150}
+        width={150}
         timeout={3000}
       />
     );

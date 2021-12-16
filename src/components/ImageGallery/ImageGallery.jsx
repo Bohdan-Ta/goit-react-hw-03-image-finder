@@ -1,9 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { toast } from 'react-toastify';
-import ImageDataView from '../ImageDataView';
-import ImagePending from '../Loader';
 import { fetch } from '../../servises/getApi';
+import ImageDataView from '../ImageDataView';
+import Spinner from '../Loader';
 import s from './ImageGallery.module.css';
 
 const Status = {
@@ -45,9 +44,9 @@ export default class ImageGallery extends Component {
           alert('Nothing more found');
           return;
         }
-        if (nextPage === 1) {
-          alert(`Found ${totalImages} images`);
-        }
+        // if (nextPage === 1) {
+        //   alert(`Found ${totalImages} images`);
+        // }
 
         this.setState(({ imagesArray }) => ({
           imagesArray: [...imagesArray, ...newImagesArray],
@@ -70,10 +69,10 @@ export default class ImageGallery extends Component {
     return (
       <>
         {status === 'idle' && (
-          <h2 className={s.enterData}>Enter data to search...</h2>
+          <h2 className={s.title}>What do you want to see?</h2>
         )}
 
-        {status === 'pending' && <ImagePending />}
+        {status === 'pending' && <Spinner />}
 
         {(status === 'resolved' || status === 'pending') && (
           <ImageDataView

@@ -27,7 +27,7 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { src, alt } = this.props.modalImg;
+    const { src, alt } = this.props.modalPicture;
     return createPortal(
       <div className={s.overlay} onClick={this.hendleBackdropClick}>
         <div className={s.modal}>

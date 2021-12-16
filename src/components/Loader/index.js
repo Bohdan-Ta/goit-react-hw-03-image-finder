@@ -1,1 +1,1 @@
-export { default } from './ImagePending';
+export { default } from './Loader';

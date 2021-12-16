@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem';
-import InfiniteScrl from '../../helpers/InfiniteScroll';
 import s from './ImageDataView.module.css';
+import Button from '../Button';
 
 export default function ImageDataView({ imagesArray, openModal, loadMore }) {
   return (
@@ -19,7 +19,7 @@ export default function ImageDataView({ imagesArray, openModal, loadMore }) {
           </li>
         ))}
       </ul>
-      <InfiniteScrl imagesArray={imagesArray} loadMore={loadMore} />
+      <Button loadMore={loadMore} />
     </>
   );
 }
