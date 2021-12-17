@@ -23,7 +23,7 @@ export default class ImageGallery extends Component {
     status: Status.IDLE,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     const prevName = prevProps.imageName;
     const nextName = this.props.imageName;
     const prevPage = prevState.page;
@@ -35,23 +35,25 @@ export default class ImageGallery extends Component {
 
     if (prevName !== nextName || prevPage !== nextPage) {
       this.setState({ status: Status.PENDING });
+      try {
+        const images = await fetch(nextName, nextPage).then(
+          ({ hits: newImagesArray, totalHits: totalImages }) => {
+            if (newImagesArray.length === 0 && totalImages === 0) {
+              return toast.info('Try to input next name... ');
+            }
+            if (newImagesArray.length === 0 && totalImages !== 0) {
+              return toast.info('Nothing more found');
+            }
 
-      fetch(nextName, nextPage).then(images => {
-        const newImagesArray = images.hits;
-        const totalImages = images.totalHits;
-
-        if (newImagesArray.length === 0 && totalImages === 0) {
-          return toast.info('Try to input next name... ');
-        }
-        if (newImagesArray.length === 0 && totalImages !== 0) {
-          return toast.info('Nothing more found');
-        }
-
-        this.setState(({ imagesArray }) => ({
-          imagesArray: [...imagesArray, ...newImagesArray],
-          status: Status.RESOLVED,
-        }));
-      });
+            this.setState(({ imagesArray }) => ({
+              imagesArray: [...imagesArray, ...newImagesArray],
+              status: Status.RESOLVED,
+            }));
+          },
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
@@ -73,7 +75,7 @@ export default class ImageGallery extends Component {
 
         {status === 'pending' && <Spinner />}
 
-        {status === 'resolved' && (
+        {(status === 'resolved' || status === 'pending') && (
           <ImageDataView
             imagesArray={imagesArray}
             openModal={openModal}
