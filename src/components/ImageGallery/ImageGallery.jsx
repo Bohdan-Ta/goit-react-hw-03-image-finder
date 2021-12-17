@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 
-import { fetch } from '../../servises/getApi';
-import ImageDataView from '../ImageDataView';
+import { fetchAPI } from '../../servises/getApi';
+import ImageDataView from './ImageDataView';
 import Spinner from '../Loader';
 
 import s from './ImageGallery.module.css';
@@ -36,7 +36,7 @@ export default class ImageGallery extends Component {
     if (prevName !== nextName || prevPage !== nextPage) {
       this.setState({ status: Status.PENDING });
       try {
-        const images = await fetch(nextName, nextPage).then(
+        await fetchAPI(nextName, nextPage).then(
           ({ hits: newImagesArray, totalHits: totalImages }) => {
             if (newImagesArray.length === 0 && totalImages === 0) {
               return toast.info('Try to input next name... ');

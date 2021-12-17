@@ -10,8 +10,8 @@ export default class Spinner extends Component {
         className={s.loader}
         type="Circles"
         color="#3f51b5"
-        height={150}
-        width={150}
+        height={100}
+        width={100}
         timeout={3000}
       />
     );

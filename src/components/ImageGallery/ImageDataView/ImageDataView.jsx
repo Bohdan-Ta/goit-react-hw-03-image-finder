@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ImageGalleryItem from '../ImageGalleryItem';
-import Button from '../Button';
+import Button from '../../Button';
 
 import s from './ImageDataView.module.css';
 
@@ -21,7 +21,7 @@ export default function ImageDataView({ imagesArray, openModal, loadMore }) {
           </li>
         ))}
       </ul>
-      <Button loadMore={loadMore} />
+      {imagesArray.length !== 0 && <Button loadMore={loadMore} />}
     </>
   );
 }

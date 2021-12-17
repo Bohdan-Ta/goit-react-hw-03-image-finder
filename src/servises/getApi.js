@@ -12,7 +12,7 @@ const getDataImages = axios.create({
     orientation: 'horizontal',
   },
 });
-export async function fetch(name, page) {
+export async function fetchAPI(name, page) {
   try {
     const { data } = await getDataImages('', { params: { q: name, page } });
     return data;
