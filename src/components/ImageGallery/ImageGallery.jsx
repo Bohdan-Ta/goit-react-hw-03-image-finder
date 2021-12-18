@@ -36,21 +36,19 @@ export default class ImageGallery extends Component {
     if (prevName !== nextName || prevPage !== nextPage) {
       this.setState({ status: Status.PENDING });
       try {
-        await fetchAPI(nextName, nextPage).then(
-          ({ hits: newImagesArray, totalHits: totalImages }) => {
-            if (newImagesArray.length === 0 && totalImages === 0) {
-              return toast.info('Try to input next name... ');
-            }
-            if (newImagesArray.length === 0 && totalImages !== 0) {
-              return toast.info('Nothing more found');
-            }
+        const { hits, totalHits } = await fetchAPI(nextName, nextPage);
 
-            this.setState(({ imagesArray }) => ({
-              imagesArray: [...imagesArray, ...newImagesArray],
-              status: Status.RESOLVED,
-            }));
-          },
-        );
+        if (hits.length === 0 && totalHits === 0) {
+          return toast.info('Try to input next name... ');
+        }
+        if (hits.length === 0 && totalHits !== 0) {
+          return toast.info('Nothing more found');
+        }
+
+        this.setState(({ imagesArray }) => ({
+          imagesArray: [...imagesArray, ...hits],
+          status: Status.RESOLVED,
+        }));
       } catch (error) {
         console.error(error);
       }
